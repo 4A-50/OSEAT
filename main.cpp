@@ -1,26 +1,21 @@
 #include "imgui.h"
 #include "imgui-SFML.h"
-
+#include "imfilebrowser.h"
 #include "SFML/Graphics.hpp"
+
+#include <iostream>
+
+void BuildIMGUIWindow(int xPos, int yPos, int width, int height, ImGuiWindowFlags window_flags, const ImGuiViewport* main_viewport, const char title[]);
 
 int main()
 {
-    sf::RenderWindow window(sf::VideoMode(800, 800), "Window Title");
+    sf::RenderWindow window(sf::VideoMode(1280, 720), "OSEAT");
     ImGui::SFML::Init(window);
 
-    bool circleExists = true;
-    float circleRadius = 200.0f;
-    int circleSegments = 100;
-    float circleColor[3] = { (float)204 / 255, (float)77 / 255, (float)5 / 255 };
-    sf::CircleShape shape(circleRadius, circleSegments);
-    shape.setFillColor(sf::Color
-    (
-        (int)(circleColor[0] * 255),
-        (int)(circleColor[1] * 255),
-        (int)(circleColor[2] * 255)
-    )); // Color circle
-    shape.setOrigin(circleRadius, circleRadius);
-    shape.setPosition(400, 400); // Center circle
+    //File Dialog Setup
+    ImGui::FileBrowser fileDialog;
+    fileDialog.SetTitle("Exercise Files");
+    fileDialog.SetTypeFilters({ ".fit" });
 
     sf::Clock deltaClock;
     while (window.isOpen())
@@ -33,32 +28,70 @@ int main()
                 window.close();
         }
         ImGui::SFML::Update(window, deltaClock.restart());
+        
+        const ImGuiViewport* main_viewport = ImGui::GetMainViewport();
 
-        ImGui::Begin("Window title");
-        ImGui::Text("Window text!");
-        ImGui::Checkbox("Circle", &circleExists);
-        ImGui::SliderFloat("Radius", &circleRadius, 100.0f, 300.0f);
-        ImGui::SliderInt("Sides", &circleSegments, 3, 150);
-        ImGui::ColorEdit3("Color Circle", circleColor);
+        ImGuiWindowFlags window_flags = 
+              ImGuiWindowFlags_NoResize 
+            | ImGuiWindowFlags_NoMove 
+            | ImGuiWindowFlags_NoSavedSettings
+            | ImGuiWindowFlags_NoCollapse;
+        
+        //----File Loader
+        BuildIMGUIWindow(20, 20, 400, 220, window_flags, main_viewport, "Exercise Files");
+
+        ImGui::Text("Load A New Exercise File (.fit)");
+        if (ImGui::Button("Select File"))
+            fileDialog.Open();
+
+        ImGui::Text("Load A Previous Exercise File:");
+        ImGui::BeginChild("Scrolling", {0, 100});
+        for (int n = 0; n < 50; n++)
+            ImGui::Text("%04d: Some text", n);
+        ImGui::EndChild();
+        ImGui::Button("Change Directory");
+
+        ImGui::End();
+        //----
+
+        fileDialog.Display();
+
+        if (fileDialog.HasSelected())
+        {
+            std::cout << "Selected Filename " << fileDialog.GetSelected().string() << std::endl;
+            fileDialog.ClearSelected();
+        }
+
+        BuildIMGUIWindow(440, 20, 400, 220, window_flags, main_viewport, "Splits");
         ImGui::End();
 
-        shape.setRadius(circleRadius);
-        shape.setOrigin(circleRadius, circleRadius);
-        shape.setPointCount(circleSegments);
-        shape.setFillColor(sf::Color
-        (
-            (int)(circleColor[0] * 255),
-            (int)(circleColor[1] * 255),
-            (int)(circleColor[2] * 255)
-        )); // Color circle
+        BuildIMGUIWindow(860, 20, 400, 220, window_flags, main_viewport, "Route");
+        ImGui::End();
 
-        window.clear(sf::Color(18, 33, 43)); // Color background
-        if (circleExists)
-            window.draw(shape);
+        BuildIMGUIWindow(20, 260, 400, 440, window_flags, main_viewport, "Test 4");
+        ImGui::End();
+
+        BuildIMGUIWindow(440, 260, 820, 440, window_flags, main_viewport, "Test 5");
+        ImGui::End();
+
+        window.clear(sf::Color(17, 17, 17));
         ImGui::SFML::Render(window);
         window.display();
     }
 
     ImGui::SFML::Shutdown();
     return 0;
+}
+
+void BuildIMGUIWindow(int xPos, int yPos, int width, int height, ImGuiWindowFlags window_flags, const ImGuiViewport* main_viewport, const char title[])
+{
+    ImGui::SetNextWindowPos(ImVec2(main_viewport->WorkPos.x + xPos, main_viewport->WorkPos.y + yPos), ImGuiCond_Always);
+    ImGui::SetNextWindowSize(ImVec2(width, height), ImGuiCond_Always);
+
+    if (!ImGui::Begin(title, NULL, window_flags))
+    {
+        // Early out if the window is collapsed, as an optimization.
+        ImGui::End();
+        return;
+    }
 }
