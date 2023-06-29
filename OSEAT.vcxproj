@@ -155,6 +155,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="analysis.cpp" />
     <ClCompile Include="file-loader.cpp" />
     <ClCompile Include="FitSDK\fit.cpp" />
     <ClCompile Include="FitSDK\fit_accumulated_field.cpp" />
@@ -196,6 +197,7 @@
     <ClCompile Include="zones.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="analysis.h" />
     <ClInclude Include="core.h" />
     <ClInclude Include="file-loader.h" />
     <ClInclude Include="fit-file-data.h" />

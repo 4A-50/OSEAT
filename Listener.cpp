@@ -41,36 +41,7 @@ float Listener::ConvertValues(const fit::FieldBase& field)
 {
     for (FIT_UINT8 j = 0; j < (FIT_UINT8)field.GetNumValues(); j++)
     {
-        //std::wcout << L"       Val" << j << L": ";
-        switch (field.GetType())
-        {
-            // Get float 64 values for numeric types to receive values that have
-            // their scale and offset properly applied.
-        case FIT_BASE_TYPE_ENUM:
-        case FIT_BASE_TYPE_BYTE:
-        case FIT_BASE_TYPE_SINT8:
-        case FIT_BASE_TYPE_UINT8:
-        case FIT_BASE_TYPE_SINT16:
-        case FIT_BASE_TYPE_UINT16:
-        case FIT_BASE_TYPE_SINT32:
-        case FIT_BASE_TYPE_UINT32:
-        case FIT_BASE_TYPE_SINT64:
-        case FIT_BASE_TYPE_UINT64:
-        case FIT_BASE_TYPE_UINT8Z:
-        case FIT_BASE_TYPE_UINT16Z:
-        case FIT_BASE_TYPE_UINT32Z:
-        case FIT_BASE_TYPE_UINT64Z:
-        case FIT_BASE_TYPE_FLOAT32:
-        case FIT_BASE_TYPE_FLOAT64:
-            return field.GetFLOAT64Value(j);
-            break;
-        case FIT_BASE_TYPE_STRING:
-            std::wcout << field.GetSTRINGValue(j) << "string ";
-            break;
-        default:
-            break;
-        }
-        std::wcout << L" " << field.GetUnits().c_str() << L"\n";;
+        return field.GetFLOAT64Value(j);
     }
 }
 
@@ -95,12 +66,155 @@ void Listener::OnMesg(fit::Mesg& mesg)
     for (FIT_UINT16 i = 0; i < (FIT_UINT16)mesg.GetNumFields(); i++)
     {
         fit::Field* field = mesg.GetFieldByIndex(i);
-        std::cout << field->GetName().c_str() << ": ";
-        PrintValues(*field);
 
-        if (field->GetName() == "avg_cadence")
+        ////
+        // The Worlds Ugliest Way To Code This, Why Doesn't C++ Have Switch Statments For Strings!
+        ////
+        //Live Data
+        if (field->GetName() == "timestamp")
+        {
+            fileData.timestamp.push_back(ConvertValues(*field));
+        }
+        else if (field->GetName() == "position_lat")
+        {
+            fileData.posLat.push_back(ConvertValues(*field) * (180 / std::pow(2, 31)));
+        }
+        else if (field->GetName() == "position_long")
+        {
+            fileData.posLong.push_back(ConvertValues(*field) * (180 / std::pow(2, 31)));
+        }
+        else if (field->GetName() == "gps_accuracy")
+        {
+            fileData.gpsAccuracy.push_back(ConvertValues(*field));
+        }
+        else if (field->GetName() == "altitude")
+        {
+            fileData.altitude.push_back(ConvertValues(*field));
+        }
+        else if (field->GetName() == "grade")
+        {
+            fileData.grade.push_back(ConvertValues(*field));
+        }
+        else if (field->GetName() == "distance")
+        {
+            fileData.distance.push_back(ConvertValues(*field));
+        }
+        else if (field->GetName() == "heart_rate")
+        {
+            fileData.heartRate.push_back(ConvertValues(*field));
+        }
+        else if (field->GetName() == "calories")
+        {
+            fileData.calories.push_back(ConvertValues(*field));
+        }
+        else if (field->GetName() == "cadence")
+        {
+            fileData.cadence.push_back(ConvertValues(*field));
+        }
+        else if (field->GetName() == "speed")
+        {
+            fileData.speed.push_back((ConvertValues(*field) * 3.6));
+        }
+        else if (field->GetName() == "temperature")
+        {
+            fileData.temp.push_back(ConvertValues(*field));
+        }
+        else if (field->GetName() == "ascent")
+        {
+            fileData.ascent.push_back(ConvertValues(*field));
+        }
+        else if (field->GetName() == "descent")
+        {
+            fileData.descent.push_back(ConvertValues(*field));
+        }
+        //Finalised Stats
+        else if (field->GetName() == "start_time")
+        {
+            fileData.startTime = ConvertValues(*field);
+        }
+        else if (field->GetName() == "total_elapsed_time")
+        {
+            fileData.elapsedTime = ConvertValues(*field);
+        }
+        else if (field->GetName() == "total_timer_time")
+        {
+            fileData.movingTime = ConvertValues(*field);
+        }
+        else if (field->GetName() == "avg_speed")
+        {
+            fileData.averageSpeed = (ConvertValues(*field) * 3.6);
+        }
+        else if (field->GetName() == "max_speed")
+        {
+            fileData.maxSpeed = (ConvertValues(*field) * 3.6);
+        }
+        else if (field->GetName() == "total_distance")
+        {
+            fileData.totalDistance = ConvertValues(*field);
+        }
+        else if (field->GetName() == "avg_cadence")
         {
             fileData.averageCadence = ConvertValues(*field);
+        }
+        else if (field->GetName() == "max_cadence")
+        {
+            fileData.maxCadence = ConvertValues(*field);
+        }
+        else if (field->GetName() == "min_heart_rate")
+        {
+            fileData.minHeartRate = ConvertValues(*field);
+        }
+        else if (field->GetName() == "avg_heart_rate")
+        {
+            fileData.averageHeartRate = ConvertValues(*field);
+        }
+        else if (field->GetName() == "max_heart_rate")
+        {
+            fileData.maxHeartRate = ConvertValues(*field);
+        }
+        else if (field->GetName() == "min_altitude")
+        {
+            fileData.minAltitude = ConvertValues(*field);
+        }
+        else if (field->GetName() == "avg_altitude")
+        {
+            fileData.averageAltitude = ConvertValues(*field);
+        }
+        else if (field->GetName() == "max_altitude")
+        {
+            fileData.maxAltitude = ConvertValues(*field);
+        }
+        else if (field->GetName() == "max_neg_grade")
+        {
+            fileData.maxNegativeGradient = ConvertValues(*field);
+        }
+        else if (field->GetName() == "avg_grade")
+        {
+            fileData.averageGradient = ConvertValues(*field);
+        }
+        else if (field->GetName() == "max_pos_grade")
+        {
+            fileData.maxPositiveGradient = ConvertValues(*field);
+        }
+        else if (field->GetName() == "total_calories")
+        {
+            fileData.totalCalories = ConvertValues(*field);
+        }
+        else if (field->GetName() == "avg_temperature")
+        {
+            fileData.averageTemperature = ConvertValues(*field);
+        }
+        else if (field->GetName() == "max_temperature")
+        {
+            fileData.maxTemperature = ConvertValues(*field);
+        }
+        else if (field->GetName() == "total_ascent")
+        {
+            fileData.totalAscent = ConvertValues(*field);
+        }
+        else if (field->GetName() == "total_descent")
+        {
+            fileData.totalDescent = ConvertValues(*field);
         }
     }
 }

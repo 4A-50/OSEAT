@@ -9,6 +9,7 @@
 #include "zones.h"
 #include "splits.h"
 #include "route.h"
+#include "analysis.h"
 
 int main()
 {
@@ -23,6 +24,7 @@ int main()
     Zones zones(fileData);
     Splits splits(fileData);
     Route route(fileData);
+    Analysis analysis(fileData);
 
     //ImGUI Window Flags
     ImGuiWindowFlags window_flags =
@@ -66,8 +68,9 @@ int main()
         zones.ZonesGUI(window_flags, main_viewport);
         //----
 
-        Core::BuildIMGUIWindow(440, 260, 820, 440, window_flags, main_viewport, "Test 5");
-        ImGui::End();
+        //----Analysis
+        analysis.AnalysisGUI(window_flags, main_viewport);
+        //----
 
         window.clear(sf::Color(17, 17, 17));
         ImGui::SFML::Render(window);

@@ -132,6 +132,9 @@
     <ClCompile Include="Listener.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="analysis.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="imgui\imconfig.h">
@@ -909,6 +912,9 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Listener.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="analysis.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

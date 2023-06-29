@@ -16,4 +16,6 @@ class Route
 
 	private:
 		FitFileData& fileData;
+
+		ImPlotAxisFlags axisFlags;
 };

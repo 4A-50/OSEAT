@@ -11,7 +11,7 @@ class FitFileData
 		/// <summary>
 		/// Timestamps In Seconds Since FIT Epoch (31 Dec 1989 UTC)
 		/// </summary>
-		std::vector<long> timestamp;
+		std::vector<float> timestamp;
 
 		/// <summary>
 		/// Latitude
@@ -25,7 +25,7 @@ class FitFileData
 		/// <summary>
 		/// GPS Accuracy In Meters
 		/// </summary>
-		std::vector<int> gpsAccuracy;
+		std::vector<float> gpsAccuracy;
 
 		/// <summary>
 		/// Altitude In Meters
@@ -45,56 +45,56 @@ class FitFileData
 		/// <summary>
 		/// Heart Rate In BPM
 		/// </summary>
-		std::vector<int> heartRate;
+		std::vector<float> heartRate;
 
 		/// <summary>
 		/// Calories In Kcal
 		/// </summary>
-		std::vector<int> calories;
+		std::vector<float> calories;
 
 		/// <summary>
 		/// Cadence In RPM
 		/// </summary>
-		std::vector<int> cadence;
+		std::vector<float> cadence;
 		/// <summary>
-		/// Speed In M/S
+		/// Speed In KPH
 		/// </summary>
 		std::vector<float> speed;
 
 		/// <summary>
 		/// Temperature In 'C
 		/// </summary>
-		std::vector<int> temp;
+		std::vector<float> temp;
 
 		/// <summary>
 		/// Ascent In Meters
 		/// </summary>
-		std::vector<int> ascent;
+		std::vector<float> ascent;
 		/// <summary>
 		/// Descent In Meters
 		/// </summary>
-		std::vector<int> descent;
+		std::vector<float> descent;
 		//----
 
 		//----Overall Data
 		/// <summary>
 		/// Start Time In Seconds Since FIT Epoch (31 Dec 1989 UTC)
 		/// </summary>
-		long startTime;
+		float startTime;
 		/// <summary>
 		/// Total Activity Time In Seconds
 		/// </summary>
-		int elapsedTime;
+		float elapsedTime;
 		/// <summary>
 		/// Total Moving Time In Seconds
 		/// </summary>
-		int movingTime;
+		float movingTime;
 		/// <summary>
-		/// Average Speed In M/S
+		/// Average Speed In KPH
 		/// </summary>
 		float averageSpeed;
 		/// <summary>
-		/// Max Speed In M/S
+		/// Max Speed In KPH
 		/// </summary>
 		float maxSpeed;
 		/// <summary>
@@ -104,23 +104,23 @@ class FitFileData
 		/// <summary>
 		/// Average Cadence In RPM
 		/// </summary>
-		int averageCadence;
+		float averageCadence;
 		/// <summary>
 		/// Max Cadence In RPM
 		/// </summary>
-		int maxCadence;
+		float maxCadence;
 		/// <summary>
 		/// Min Heart Rate In BPM
 		/// </summary>
-		int minHeartRate;
+		float minHeartRate;
 		/// <summary>
 		/// Average Heart Rate In BPM
 		/// </summary>
-		int averageHeartRate;
+		float averageHeartRate;
 		/// <summary>
 		/// Max Heart Rate In BPM
 		/// </summary>
-		int maxHeartRate;
+		float maxHeartRate;
 		/// <summary>
 		/// Min Altitude In Meters
 		/// </summary>
@@ -148,23 +148,23 @@ class FitFileData
 		/// <summary>
 		/// Total Calories In Kcal
 		/// </summary>
-		int totalCalories;
+		float totalCalories;
 		/// <summary>
 		/// Average Temperature In 'C
 		/// </summary>
-		int averageTemperature;
+		float averageTemperature;
 		/// <summary>
 		/// Max Temperature In 'C
 		/// </summary>
-		int maxTemperature;
+		float maxTemperature;
 		/// <summary>
 		/// Total Ascent In Meters
 		/// </summary>
-		int totalAscent;
+		float totalAscent;
 		/// <summary>
 		/// Total Descent In Meters
 		/// </summary>
-		int totalDescent;
+		float totalDescent;
 		//----
 
 		/// <summary>
