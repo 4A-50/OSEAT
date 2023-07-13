@@ -1,11 +1,14 @@
 #pragma once
 
 #include <vector>
+#include <iostream>
 
 class FitFileData
 {
 	public:
 		FitFileData() {}
+
+		std::string fileName = "##";
 
 		//----Live Data
 		/// <summary>
@@ -17,10 +20,14 @@ class FitFileData
 		/// Latitude
 		/// </summary>
 		std::vector<float> posLat;
+		float minPosLat;
+		float maxPosLat;
 		/// <summary>
 		/// Longitude
 		/// </summary>
 		std::vector<float> posLong;
+		float minPosLong;
+		float maxPosLong;
 
 		/// <summary>
 		/// GPS Accuracy In Meters
@@ -41,6 +48,8 @@ class FitFileData
 		/// Distance In Meters
 		/// </summary>
 		std::vector<float> distance;
+		float minDistance;
+		float maxDistance;
 
 		/// <summary>
 		/// Heart Rate In BPM
@@ -170,10 +179,61 @@ class FitFileData
 		/// <summary>
 		/// Clears All The Data
 		/// </summary>
-		FitFileData ClearFileData();
+		void ClearFileData();
 };
 
-inline FitFileData FitFileData::ClearFileData() 
+/// <summary>
+/// Clears All The Data
+/// Not How I Wanted To Do It
+/// </summary>
+inline void FitFileData::ClearFileData()
 {
-	return FitFileData();
+	fileName = "##";
+
+	posLat.clear();
+	minPosLat = 0;
+	maxPosLat = 0;
+
+	posLong.clear();
+	minPosLong = 0;
+	maxPosLong = 0;
+
+	gpsAccuracy.clear();
+	altitude.clear();
+	grade.clear();
+
+	distance.clear();
+	minDistance = 0;
+	maxDistance = 0;
+
+	heartRate.clear();
+	calories.clear();
+	cadence.clear();
+	speed.clear();
+	temp.clear();
+	ascent.clear();
+	descent.clear();
+
+	startTime = 0;
+	elapsedTime = 0;
+	movingTime = 0;
+	averageSpeed = 0;
+	maxSpeed = 0;
+	totalDistance = 0;
+	averageCadence = 0;
+	maxCadence = 0;
+	minHeartRate = 0;
+	averageHeartRate = 0;
+	maxHeartRate = 0;
+	minAltitude = 0;
+	averageAltitude = 0;
+	maxAltitude = 0;
+	maxNegativeGradient = 0;
+	averageGradient = 0;
+	maxPositiveGradient = 0;
+	totalCalories = 0;
+	averageTemperature = 0;
+	maxTemperature = 0;
+	totalAscent = 0;
+	totalDescent = 0;
 }

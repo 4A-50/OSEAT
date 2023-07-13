@@ -15,6 +15,8 @@ class Analysis
 	private:
 		FitFileData& fileData;
 
+		ImPlotAxisFlags plotFlags;
+
 		float rowRatios[5] = { 3, 2, 1.5, 1, 1 };
 		float colRatios[1] = { 1 };
 };

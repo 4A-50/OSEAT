@@ -3,6 +3,7 @@
 #include "imgui.h"
 #include "implot.h"
 #include "math.h"
+#include <algorithm>
 
 #include "core.h"
 #include "fit-file-data.h"

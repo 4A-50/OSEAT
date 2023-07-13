@@ -385,7 +385,7 @@ void Listener::OnMesg(fit::RecordMesg& record)
 
 void Listener::OnDeveloperFieldDescription(const fit::DeveloperFieldDescription& desc)
 {
-    printf("New Developer Field Description\n");
+    /*printf("New Developer Field Description\n");
     printf("   App Version: %d\n", desc.GetApplicationVersion());
-    printf("   Field Number: %d\n", desc.GetFieldDefinitionNumber());
+    printf("   Field Number: %d\n", desc.GetFieldDefinitionNumber());*/
 }

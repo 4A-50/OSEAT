@@ -22,7 +22,6 @@ class Listener
     public:
 
         Listener() = default;
-        Listener(FitFileData& _fileData) : fileData(_fileData) {}
 
         static void PrintValues(const fit::FieldBase& field);
 
