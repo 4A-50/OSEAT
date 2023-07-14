@@ -917,5 +917,8 @@
     <ClInclude Include="analysis.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="lap-data.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>

@@ -45,6 +45,27 @@ float Listener::ConvertValues(const fit::FieldBase& field)
     }
 }
 
+void Listener::OnMesg(fit::LapMesg& mesg)
+{
+    LapData newLap;
+
+    for (FIT_UINT16 i = 0; i < (FIT_UINT16)mesg.GetNumFields(); i++)
+    {
+        fit::Field* field = mesg.GetFieldByIndex(i);
+
+        if (field->GetName() == "total_timer_time")
+        {
+            newLap.totalTime = ConvertValues(*field);
+        }
+        else if (field->GetName() == "total_distance")
+        {
+            newLap.totalDistance = ConvertValues(*field);
+        }
+    }
+
+    fileData.laps.push_back(newLap);
+}
+
 void Listener::OnMesg(fit::Mesg& mesg)
 {
     /*printf("On Mesg:\n");

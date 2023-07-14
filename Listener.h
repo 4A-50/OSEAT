@@ -16,6 +16,7 @@ class Listener
     , public fit::MonitoringMesgListener
     , public fit::DeviceInfoMesgListener
     , public fit::MesgListener
+    , public fit::LapMesgListener
     , public fit::DeveloperFieldDescriptionListener
     , public fit::RecordMesgListener
 {
@@ -28,6 +29,8 @@ class Listener
         float ConvertValues(const fit::FieldBase& field);
 
         void OnMesg(fit::Mesg& mesg);
+
+        void OnMesg(fit::LapMesg& mesg);
 
         void OnMesg(fit::FileIdMesg& mesg);
 

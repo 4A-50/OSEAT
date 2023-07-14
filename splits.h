@@ -15,7 +15,9 @@ class Splits
 		void SplitsGUI(ImGuiWindowFlags window_flags, const ImGuiViewport* main_viewport);
 
 	private:
+		float ConvertToMinPerKM(float movingTime, float distance);
+
 		FitFileData& fileData;
 
-		std::vector<int> splits = { 4, 5, 5, 6, 4 };
+		std::vector<float> splits;
 };

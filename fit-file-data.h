@@ -2,6 +2,7 @@
 
 #include <vector>
 #include <iostream>
+#include "lap-data.h"
 
 class FitFileData
 {
@@ -176,6 +177,10 @@ class FitFileData
 		float totalDescent;
 		//----
 
+		//----Laps
+		std::vector<LapData> laps;
+		//----
+
 		/// <summary>
 		/// Clears All The Data
 		/// </summary>
@@ -236,4 +241,6 @@ inline void FitFileData::ClearFileData()
 	maxTemperature = 0;
 	totalAscent = 0;
 	totalDescent = 0;
+
+	laps.clear();
 }

@@ -11,6 +11,7 @@ FileLoader::FileLoader(FitFileData& _fileData) : fileData(_fileData)
     file = std::fstream();
 
     mesgBroadcaster.AddListener((fit::MesgListener&)listener);
+    mesgBroadcaster.AddListener((fit::LapMesgListener&)listener);
 
     //File Dialog Setup
     fileDialog = ImGui::FileBrowser(ImGuiFileBrowserFlags_SelectDirectory);
