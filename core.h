@@ -1,11 +1,13 @@
 #pragma once
 
 #include "imgui.h"
+#include "fit-file-data.h"
 
 class Core
 {
 	public:
 		static void BuildIMGUIWindow(int xPos, int yPos, int width, int height, ImGuiWindowFlags window_flags, const ImGuiViewport* main_viewport, const char title[]);
+        static inline FitFileData fileData;
 };
 
 inline void Core::BuildIMGUIWindow(int xPos, int yPos, int width, int height, ImGuiWindowFlags window_flags, const ImGuiViewport* main_viewport, const char title[])

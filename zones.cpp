@@ -1,7 +1,5 @@
 #include "zones.h"
 
-Zones::Zones(FitFileData& _fileData) : fileData(_fileData) {}
-
 void Zones::ZonesGUI(ImGuiWindowFlags window_flags, const ImGuiViewport* main_viewport)
 {
     //Builds The Core Of The Section Window

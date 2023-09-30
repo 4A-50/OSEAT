@@ -63,7 +63,7 @@ void Listener::OnMesg(fit::LapMesg& mesg)
         }
     }
 
-    fileData.laps.push_back(newLap);
+    Core::fileData.laps.push_back(newLap);
 }
 
 void Listener::OnMesg(fit::Mesg& mesg)
@@ -94,148 +94,148 @@ void Listener::OnMesg(fit::Mesg& mesg)
         //Live Data
         if (field->GetName() == "timestamp")
         {
-            fileData.timestamp.push_back(ConvertValues(*field));
+            Core::fileData.timestamp.push_back(ConvertValues(*field));
         }
         else if (field->GetName() == "position_lat")
         {
-            fileData.posLat.push_back(ConvertValues(*field) * (180 / std::pow(2, 31)));
+            Core::fileData.posLat.push_back(ConvertValues(*field) * (180 / std::pow(2, 31)));
         }
         else if (field->GetName() == "position_long")
         {
-            fileData.posLong.push_back(ConvertValues(*field) * (180 / std::pow(2, 31)));
+            Core::fileData.posLong.push_back(ConvertValues(*field) * (180 / std::pow(2, 31)));
         }
         else if (field->GetName() == "gps_accuracy")
         {
-            fileData.gpsAccuracy.push_back(ConvertValues(*field));
+            Core::fileData.gpsAccuracy.push_back(ConvertValues(*field));
         }
         else if (field->GetName() == "altitude")
         {
-            fileData.altitude.push_back(ConvertValues(*field));
+            Core::fileData.altitude.push_back(ConvertValues(*field));
         }
         else if (field->GetName() == "grade")
         {
-            fileData.grade.push_back(ConvertValues(*field));
+            Core::fileData.grade.push_back(ConvertValues(*field));
         }
         else if (field->GetName() == "distance")
         {
-            fileData.distance.push_back(ConvertValues(*field));
+            Core::fileData.distance.push_back(ConvertValues(*field));
         }
         else if (field->GetName() == "heart_rate")
         {
-            fileData.heartRate.push_back(ConvertValues(*field));
+            Core::fileData.heartRate.push_back(ConvertValues(*field));
         }
         else if (field->GetName() == "calories")
         {
-            fileData.calories.push_back(ConvertValues(*field));
+            Core::fileData.calories.push_back(ConvertValues(*field));
         }
         else if (field->GetName() == "cadence")
         {
-            fileData.cadence.push_back(ConvertValues(*field));
+            Core::fileData.cadence.push_back(ConvertValues(*field));
         }
         else if (field->GetName() == "speed")
         {
-            fileData.speed.push_back((ConvertValues(*field) * 3.6));
+            Core::fileData.speed.push_back((ConvertValues(*field) * 3.6));
         }
         else if (field->GetName() == "temperature")
         {
-            fileData.temp.push_back(ConvertValues(*field));
+            Core::fileData.temp.push_back(ConvertValues(*field));
         }
         else if (field->GetName() == "ascent")
         {
-            fileData.ascent.push_back(ConvertValues(*field));
+            Core::fileData.ascent.push_back(ConvertValues(*field));
         }
         else if (field->GetName() == "descent")
         {
-            fileData.descent.push_back(ConvertValues(*field));
+            Core::fileData.descent.push_back(ConvertValues(*field));
         }
         //Finalised Stats
         else if (field->GetName() == "start_time")
         {
-            fileData.startTime = ConvertValues(*field);
+            Core::fileData.startTime = ConvertValues(*field);
         }
         else if (field->GetName() == "total_elapsed_time")
         {
-            fileData.elapsedTime = ConvertValues(*field);
+            Core::fileData.elapsedTime = ConvertValues(*field);
         }
         else if (field->GetName() == "total_timer_time")
         {
-            fileData.movingTime = ConvertValues(*field);
+            Core::fileData.movingTime = ConvertValues(*field);
         }
         else if (field->GetName() == "avg_speed")
         {
-            fileData.averageSpeed = (ConvertValues(*field) * 3.6);
+            Core::fileData.averageSpeed = (ConvertValues(*field) * 3.6);
         }
         else if (field->GetName() == "max_speed")
         {
-            fileData.maxSpeed = (ConvertValues(*field) * 3.6);
+            Core::fileData.maxSpeed = (ConvertValues(*field) * 3.6);
         }
         else if (field->GetName() == "total_distance")
         {
-            fileData.totalDistance = ConvertValues(*field);
+            Core::fileData.totalDistance = ConvertValues(*field);
         }
         else if (field->GetName() == "avg_cadence")
         {
-            fileData.averageCadence = ConvertValues(*field);
+            Core::fileData.averageCadence = ConvertValues(*field);
         }
         else if (field->GetName() == "max_cadence")
         {
-            fileData.maxCadence = ConvertValues(*field);
+            Core::fileData.maxCadence = ConvertValues(*field);
         }
         else if (field->GetName() == "min_heart_rate")
         {
-            fileData.minHeartRate = ConvertValues(*field);
+            Core::fileData.minHeartRate = ConvertValues(*field);
         }
         else if (field->GetName() == "avg_heart_rate")
         {
-            fileData.averageHeartRate = ConvertValues(*field);
+            Core::fileData.averageHeartRate = ConvertValues(*field);
         }
         else if (field->GetName() == "max_heart_rate")
         {
-            fileData.maxHeartRate = ConvertValues(*field);
+            Core::fileData.maxHeartRate = ConvertValues(*field);
         }
         else if (field->GetName() == "min_altitude")
         {
-            fileData.minAltitude = ConvertValues(*field);
+            Core::fileData.minAltitude = ConvertValues(*field);
         }
         else if (field->GetName() == "avg_altitude")
         {
-            fileData.averageAltitude = ConvertValues(*field);
+            Core::fileData.averageAltitude = ConvertValues(*field);
         }
         else if (field->GetName() == "max_altitude")
         {
-            fileData.maxAltitude = ConvertValues(*field);
+            Core::fileData.maxAltitude = ConvertValues(*field);
         }
         else if (field->GetName() == "max_neg_grade")
         {
-            fileData.maxNegativeGradient = ConvertValues(*field);
+            Core::fileData.maxNegativeGradient = ConvertValues(*field);
         }
         else if (field->GetName() == "avg_grade")
         {
-            fileData.averageGradient = ConvertValues(*field);
+            Core::fileData.averageGradient = ConvertValues(*field);
         }
         else if (field->GetName() == "max_pos_grade")
         {
-            fileData.maxPositiveGradient = ConvertValues(*field);
+            Core::fileData.maxPositiveGradient = ConvertValues(*field);
         }
         else if (field->GetName() == "total_calories")
         {
-            fileData.totalCalories = ConvertValues(*field);
+            Core::fileData.totalCalories = ConvertValues(*field);
         }
         else if (field->GetName() == "avg_temperature")
         {
-            fileData.averageTemperature = ConvertValues(*field);
+            Core::fileData.averageTemperature = ConvertValues(*field);
         }
         else if (field->GetName() == "max_temperature")
         {
-            fileData.maxTemperature = ConvertValues(*field);
+            Core::fileData.maxTemperature = ConvertValues(*field);
         }
         else if (field->GetName() == "total_ascent")
         {
-            fileData.totalAscent = ConvertValues(*field);
+            Core::fileData.totalAscent = ConvertValues(*field);
         }
         else if (field->GetName() == "total_descent")
         {
-            fileData.totalDescent = ConvertValues(*field);
+            Core::fileData.totalDescent = ConvertValues(*field);
         }
     }
 }

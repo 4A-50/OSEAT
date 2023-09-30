@@ -6,17 +6,13 @@
 #include <algorithm>
 
 #include "core.h"
-#include "fit-file-data.h"
 
 class Route
 {
 	public:
-		Route(FitFileData& _fileData);
-
 		void RouteGUI(ImGuiWindowFlags window_flags, const ImGuiViewport* main_viewport);
 
 	private:
-		FitFileData& fileData;
 
-		ImPlotAxisFlags axisFlags;
+		ImPlotAxisFlags axisFlags = ImPlotAxisFlags_NoDecorations;;
 };

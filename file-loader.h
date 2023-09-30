@@ -9,7 +9,6 @@
 #include "Listener.h"
 
 #include "core.h"
-#include "fit-file-data.h"
 
 #include <vector>
 #include <fstream>
@@ -18,11 +17,10 @@
 class FileLoader
 {
 	public:
-		FileLoader(FitFileData& _fileData);
+		FileLoader();
 		void FileLoaderGUI(ImGuiWindowFlags window_flags, const ImGuiViewport* main_viewport);
 
 	private:
-		FitFileData& fileData;
 
 		fit::Decode decode;
 		fit::MesgBroadcaster mesgBroadcaster;

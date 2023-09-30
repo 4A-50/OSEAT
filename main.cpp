@@ -4,7 +4,6 @@
 #include "SFML/Graphics.hpp"
 
 #include "core.h"
-#include "fit-file-data.h"
 #include "file-loader.h"
 #include "zones.h"
 #include "splits.h"
@@ -17,14 +16,14 @@ int main()
     ImGui::SFML::Init(window);
 
     //Initialises The FitFileData Class
-    FitFileData fileData = FitFileData();
+    Core::fileData = FitFileData();
 
     //Initialises The Window Classes
-    FileLoader fileLoader(fileData);
-    Zones zones(fileData);
-    Splits splits(fileData);
-    Route route(fileData);
-    Analysis analysis(fileData);
+    FileLoader fileLoader = FileLoader();
+    Zones zones = Zones();
+    Splits splits = Splits();
+    Route route = Route();
+    Analysis analysis = Analysis();
 
     //ImGUI Window Flags
     ImGuiWindowFlags window_flags =
@@ -77,7 +76,7 @@ int main()
         window.display();
     }
 
-    std::cout << fileData.averageCadence << std::endl;
+    std::cout << Core::fileData.averageCadence << std::endl;
 
     ImGui::SFML::Shutdown();
     ImGui::DestroyContext();

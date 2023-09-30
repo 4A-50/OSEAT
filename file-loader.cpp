@@ -1,8 +1,7 @@
 #include "file-loader.h"
-
 #include <iostream>
 
-FileLoader::FileLoader(FitFileData& _fileData) : fileData(_fileData)
+FileLoader::FileLoader()
 {
     //Fit SDK Setup
     decode = fit::Decode();
@@ -95,15 +94,9 @@ void FileLoader::SearchDirectory()
 void FileLoader::LoadFile(int fileIndex)
 {
     //Resets The File Data Class To A Clean Slate
-    fileData.ClearFileData();
-    //Sends The Clear Class To The Listener
-    listener.fileData = fileData;
-
-    std::cout << fileData.posLat.size() << std::endl;
+    Core::fileData.ClearFileData();
 
     std::string filePath = path + "\\" + files[fileIndex] + ext;
-
-    std::cout << filePath << std::endl;
 
     file.open(filePath, std::ios::in | std::ios::binary);
 
@@ -128,22 +121,17 @@ void FileLoader::LoadFile(int fileIndex)
         return;
     }
 
-    printf("Decoded FIT file.\n");
-    
-    //A Bodge To Fix The Problems Making The Listener Version A Reference Makes
-    fileData = listener.fileData;
+    file.close();
 
-    fileData.fileName += files[fileIndex];
+    Core::fileData.fileName += files[fileIndex];
 
     //Find The Min & Max Values Of The Lat, Long & Distance
-    fileData.minPosLat = (std::min_element(fileData.posLat.begin(), fileData.posLat.end()))[0];
-    fileData.maxPosLat = (std::max_element(fileData.posLat.begin(), fileData.posLat.end()))[0];
+    Core::fileData.minPosLat = (std::min_element(Core::fileData.posLat.begin(), Core::fileData.posLat.end()))[0];
+    Core::fileData.maxPosLat = (std::max_element(Core::fileData.posLat.begin(), Core::fileData.posLat.end()))[0];
 
-    fileData.minPosLong = (std::min_element(fileData.posLong.begin(), fileData.posLong.end()))[0];
-    fileData.maxPosLong = (std::max_element(fileData.posLong.begin(), fileData.posLong.end()))[0];
+    Core::fileData.minPosLong = (std::min_element(Core::fileData.posLong.begin(), Core::fileData.posLong.end()))[0];
+    Core::fileData.maxPosLong = (std::max_element(Core::fileData.posLong.begin(), Core::fileData.posLong.end()))[0];
 
-    fileData.minDistance = (std::min_element(fileData.distance.begin(), fileData.distance.end()))[0];
-    fileData.maxDistance = (std::max_element(fileData.distance.begin(), fileData.distance.end()))[0];
-
-    std::cout << fileData.posLat.size() << std::endl;
+    Core::fileData.minDistance = (std::min_element(Core::fileData.distance.begin(), Core::fileData.distance.end()))[0];
+    Core::fileData.maxDistance = (std::max_element(Core::fileData.distance.begin(), Core::fileData.distance.end()))[0];
 }

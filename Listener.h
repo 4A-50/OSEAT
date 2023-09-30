@@ -7,7 +7,7 @@
 #include "fit_decode.hpp"
 #include "fit_mesg_broadcaster.hpp"
 #include "fit_developer_field_description.hpp"
-#include "fit-file-data.h"
+#include "core.h"
 
 #include <iostream>
 class Listener
@@ -45,6 +45,4 @@ class Listener
         void OnMesg(fit::RecordMesg& record) override;
 
         void OnDeveloperFieldDescription(const fit::DeveloperFieldDescription& desc) override;
-
-        FitFileData fileData;
 };

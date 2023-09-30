@@ -1,7 +1,5 @@
 #include "splits.h"
 
-Splits::Splits(FitFileData& _fileData) : fileData(_fileData) {}
-
 void Splits::SplitsGUI(ImGuiWindowFlags window_flags, const ImGuiViewport* main_viewport)
 {
     //Builds The Core Of The Section Window
@@ -10,9 +8,9 @@ void Splits::SplitsGUI(ImGuiWindowFlags window_flags, const ImGuiViewport* main_
     //Gets The Lap Data
     splits.clear();
     
-    for (int i = 0; i < fileData.laps.size(); i++)
+    for (int i = 0; i < Core::fileData.laps.size(); i++)
     {
-        splits.push_back(ConvertToMinPerKM(fileData.laps[i].totalTime, fileData.laps[i].totalDistance));
+        splits.push_back(ConvertToMinPerKM(Core::fileData.laps[i].totalTime, Core::fileData.laps[i].totalDistance));
     }
 
     //Creates The Split Plot
